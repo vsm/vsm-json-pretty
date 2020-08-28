@@ -1,6 +1,6 @@
 {
   "name": "vsm-json-pretty",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "Converts VSM-JSON (as String or JS-Object) to a compact, readable JSON5 String",
   "main": "src/index.js",
   "scripts": {
@@ -10,7 +10,9 @@
     "build": "webpack --config webpack.config.js",
     "prepublishOnly": "npm run lint && npm run test && npm run build"
   },
-  "files": ["dist/**/*"],
+  "files": [
+    "dist/**/*"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vsm/vsm-json-pretty.git"
