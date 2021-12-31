@@ -302,6 +302,33 @@ describe('vsmJsonPretty(): JSON5', function() {
 
 
 
+  it('converts terms with singlequotes, doublequotes, etc', () => {
+    var inputStr = JSON.stringify({
+      terms: [
+        { str:     'a\'"&<>',
+          classID: 'a\'"&<>a\'"&<>',
+          instID:  'a\'"&<>a\'"&<>a\'"&<>'
+        }
+      ],
+      conns: [ ]
+    });
+
+    var outputStr = outdentBlock(`
+      { terms: [
+          { str: `     + `'a\\'"&<>',
+            classID: ` + `'a\\'"&<>a\\'"&<>',
+            instID: `  + `'a\\'"&<>a\\'"&<>a\\'"&<>'
+          }
+        ],
+        conns: [  ]
+      }
+    `);
+
+    vsmJson5(inputStr).should.equal(outputStr);
+  });
+
+
+
   it('uses options.maxLength', () => {
     var inputObj = {
       terms: [

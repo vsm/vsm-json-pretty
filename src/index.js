@@ -18,8 +18,8 @@ module.exports = function vsmJsonPretty(vsm, options) {
       .replace(/ "([a-zA-Z]+)": /g, ' $1: ')     // Unquote property-keys.
       .replace(/{\n {2}terms:/  , '{ terms:')    // Merge first two lines.
       .replace(/, conns:/       , ',\n  conns:') // 'conns:' always on new line.
-      .replace(/'/g             , '\\\'')
-      .replace(/"/g             , '\'')          // Un-doublequote keys.
+      .replace(/(?<!\\)"((?:\\"|[^"])*?)"/g,     // Un-doublequote values.
+        (_, $1) => '\'' + $1.replace(/\\"/g, '"').replace(/'/g, '\\\'') + '\'')
       .replace(/\n {4}{\n {6}/g , '\n    { ')    // Less spacious Terms.
       .replace(/\n {6,10}([\]}],?\n)/g, ' $1')   // Compactify `queryOptions`.
       .replace(/] }$/           , ']\n}')        // Last '}' always on new line.
